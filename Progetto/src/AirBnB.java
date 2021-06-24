@@ -1,13 +1,15 @@
 import exceptions.UtenteNotFoundException;
 
+import exceptions.UtenteNotFoundException;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class AirBnB {
-    HashMap<UtenteHost, HashSet<Abitazione>> host_setAbitazioni;
-    HashMap<Utente, TreeSet<Prenotazione>> utente_setPrenotazioni;
+    HashMap<UUID, HashSet<Abitazione>> host_setAbitazioni;
+    HashMap<UUID, TreeSet<Prenotazione>> utente_setPrenotazioni;
     HashMap<Abitazione, TreeSet<Prenotazione>> abitazione_setPrenotazioni;
     HashSet<Utente> utenti;
 
@@ -36,6 +38,11 @@ public class AirBnB {
         long p2 = ChronoUnit.DAYS.between(data1, data2);
         System.out.println(p2);
 
+    }
+
+    public HashSet<Abitazione> getAbitazione (UUID utenteHostId)
+    {
+        return host_setAbitazioni.get(utenteHostId);
     }
 
 }
