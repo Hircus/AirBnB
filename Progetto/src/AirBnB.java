@@ -333,11 +333,4 @@ public class AirBnB {
 
     }
 
-<<<<<<< HEAD
-    public Set<UtenteHost> getAllSuperHosts{
-
-    }
-=======
-
->>>>>>> main
 }
