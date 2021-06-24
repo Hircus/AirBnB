@@ -12,15 +12,12 @@ public class AirBnB {
     HashMap<Abitazione, TreeSet<Prenotazione>> abitazione_setPrenotazioni;
 
     // DA QUI INIZIA IL CODICE DI ANTONIO
-<<<<<<< HEAD
     //ciao a tutti cari followers
 
 
-=======
     // commento di pier
 
 //commento
->>>>>>> main
 
 
 
