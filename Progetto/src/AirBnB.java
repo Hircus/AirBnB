@@ -12,9 +12,15 @@ public class AirBnB {
     HashMap<Abitazione, TreeSet<Prenotazione>> abitazione_setPrenotazioni;
 
     // DA QUI INIZIA IL CODICE DI ANTONIO
+<<<<<<< HEAD
     //ciao a tutti cari followers
 
 
+=======
+    // commento di pier
+
+//commento
+>>>>>>> main
 
 
 
@@ -332,9 +338,14 @@ public class AirBnB {
         System.out.println(LocalDate.now().toEpochDay());
         long p2 = ChronoUnit.DAYS.between(data1, data2);
         System.out.println(p2);
+
     }
 
+<<<<<<< HEAD
     public Set<UtenteHost> getAllSuperHosts{
 
     }
+=======
+
+>>>>>>> main
 }
