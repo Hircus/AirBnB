@@ -26,6 +26,7 @@ public class AirBnB {
         if(utenteID == null)
             throw new UtenteNotFoundException("L'utente inserito non esiste!");
 
+        return utente_setPrenotazioni.get(utenteID).last();
     }
 
     public static void main(String[] args) {
