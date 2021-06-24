@@ -15,11 +15,21 @@ public class AirBnB {
 
     // DA QUI INIZIA IL CODICE DI ANTONIO
     public Set<UtenteHost> getAllSuperHosts(){
+        Set<UtenteHost> superHosts = new HashSet<>();
         for (Utente utente : utenti) {
-            if (utente instanceof UtenteHost host && host.isSuper()){
-                hos
+            if (utente instanceof UtenteHost host){
+                Set<Abitazione> abitazioniHost = host_setAbitazioni.get(host.getHostID());
+                int prenotazioni = 0;
+                for (Abitazione abitazione : abitazioniHost) {
+                    prenotazioni += abitazione_setPrenotazioni.get(abitazione).size();
+                }
+                if (prenotazioni>=0) {
+                    host.setSuper(true);
+                    superHosts.add(host);
+                }
             }
         }
+        return superHosts;
     }
 
     public Prenotazione getLastPrenotazione(UUID utenteID) throws UtenteNotFoundException {
