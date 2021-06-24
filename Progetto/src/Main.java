@@ -1,9 +1,11 @@
+import exceptions.UtenteNotFoundException;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UtenteNotFoundException {
         AirBnB a = new AirBnB();
 
         LocalDate data1= LocalDate.now();
@@ -51,5 +53,12 @@ public class Main {
         a.addAbitPrenotazione(a3, p7);
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
+        
+        a.addUtenti(antonio);
+        a.addUtenti(hemilian);
+        a.addUtenti(pierluigi);
+        a.addUtenti(senghor);
+        a.addUtenti(riccardo);
+        a.addUtenti(melvin);
     }
 }
