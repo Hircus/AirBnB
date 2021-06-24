@@ -25,6 +25,7 @@ public class Abitazione
         setNumeroLocali(numeroLocali);
         setInizioDisponibilita(inizioDisponibilita);
         setFineDisponibilita(fineDisponibilita);
+        setId(UUID.randomUUID());
     }
 
     /*** SETTERS AND GETTERS ***/
