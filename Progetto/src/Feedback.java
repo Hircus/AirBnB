@@ -6,7 +6,7 @@ public class Feedback {
     private String testo;
     private int punteggio;
 
-    public Feedback(UUID id, String titolo, String testo, int punteggio) {
+    public Feedback(String titolo, String testo, int punteggio) {
         this.id = UUID.randomUUID();
         this.titolo = titolo;
         this.testo = testo;
