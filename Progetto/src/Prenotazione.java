@@ -2,6 +2,13 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Prenotazione {
+public Prenotazione (UUID id, LocalDate dataInizio, LocalDate dataFine){
+
+    this.id = id;
+    this.dataInizio = dataInizio;
+    this.dataFine = dataFine;
+
+}
 
 
     private UUID id;
@@ -34,7 +41,6 @@ public class Prenotazione {
     }
 
 public void addFeedback( Prenotazione p){
-
 }
 
 }
