@@ -1,13 +1,14 @@
 import java.util.UUID;
 
 public class Utente {
-    private final UUID id = UUID.randomUUID();
+    private final UUID id;
     private String nome;
     private String cognome;
     private String email;
     private String indirizzo;
 
     public Utente(String nome, String cognome, String email) {
+        this.id = UUID.randomUUID();
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;

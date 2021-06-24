@@ -14,6 +14,24 @@ public class AirBnB {
     HashSet<Utente> utenti;
 
     // DA QUI INIZIA IL CODICE DI ANTONIO
+
+    public void addUtenti(Utente u) throws UtenteNotFoundException{
+        if(u == null) throw new UtenteNotFoundException("L'utente inserito non esiste!");
+        utenti.add(u);
+    }
+
+    public void addHostAbitazioni(UUID host, Abitazione abitazione){
+        host_setAbitazioni.get(host).add(abitazione);
+    }
+
+    public void addUtentePrenotazione(UUID idUtente, Prenotazione prenotazione){
+        utente_setPrenotazioni.get(idUtente).add(prenotazione);
+    }
+
+    public void addAbitPrenotazione(Abitazione abitazione, Prenotazione prenotazione){
+        abitazione_setPrenotazioni.get(abitazione).add(prenotazione);
+    }
+
     public Set<UtenteHost> getAllSuperHosts(){
         Set<UtenteHost> superHosts = new HashSet<>();
         for (Utente utente : utenti) {

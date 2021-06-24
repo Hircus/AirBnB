@@ -37,7 +37,6 @@ public class Prenotazione {
         return dataFine;
     }
 
-public void addFeedback( Prenotazione p){
-}
-
+    public void addFeedback( Prenotazione p){
+    }
 }
