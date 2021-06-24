@@ -1,3 +1,4 @@
+# Requisiti
 Un facoltoso turista americano ci ha chiesto di creare una piattaforma ispirata ad un famoso sito per affittare
 case vacanza. Tutti possono registrarsi alla piattaforma e, se approvati come host, caricare una o più abitazioni
 e specificare un prezzo, un periodo (data di inizio e data di fine) durante il quale l'abitazione è 
@@ -26,3 +27,6 @@ Period.between(aDate, sixtyDaysBehind);
 `
 
 Nota: gestite tutto con le collection, nessun database (per ora!)
+
+# Diagramma delle classi
+![classdiagram](./ClassDiagram.svg)
