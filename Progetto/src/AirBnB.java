@@ -5,10 +5,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class AirBnB {
-    HashMap<UUID, HashSet<Abitazione>> host_setAbitazioni;
-    HashMap<UUID, TreeSet<Prenotazione>> utente_setPrenotazioni;
-    HashMap<Abitazione, TreeSet<Prenotazione>> abitazione_setPrenotazioni;
-    HashSet<Utente> utenti;
+    Map<UUID, HashSet<Abitazione>> host_setAbitazioni;
+    Map<UUID, TreeSet<Prenotazione>> utente_setPrenotazioni;
+    Map<Abitazione, TreeSet<Prenotazione>> abitazione_setPrenotazioni;
+    Set<Utente> utenti;
 
     public AirBnB() {
         this.host_setAbitazioni = new HashMap<>();
@@ -35,7 +35,8 @@ public class AirBnB {
     * @param abitazione l'abitazione appartenente all'utente host.
     */
     public void addHostAbitazioni(UUID host, Abitazione abitazione){
-        host_setAbitazioni.get(host).add(abitazione);
+        if (host_setAbitazioni.containsKey(host)) host_setAbitazioni.get(host).add(abitazione);
+        else host_setAbitazioni.put(host, new HashSet<>(Set.of(abitazione)));
     }
 
     /**
@@ -44,6 +45,12 @@ public class AirBnB {
     * @param prenotazione la prenotazione effettuata dall'utente.
     */
     public void addUtentePrenotazione(UUID idUtente, Prenotazione prenotazione){
+        TreeSet<Prenotazione> tree = new TreeSet<>((o1, o2) -> {
+            if (o1.getDataInizio().isAfter(o2.getDataInizio())) return -1;
+            else if (o1.getDataInizio().isBefore(o2.getDataInizio())) return 1;
+            else return 0;
+        });
+        if (!utente_setPrenotazioni.containsKey(idUtente)) utente_setPrenotazioni.put(idUtente, tree);
         utente_setPrenotazioni.get(idUtente).add(prenotazione);
     }
 
@@ -53,6 +60,12 @@ public class AirBnB {
     * @param prenotazione .
     */
     public void addAbitPrenotazione(Abitazione abitazione, Prenotazione prenotazione){
+        TreeSet<Prenotazione> tree = new TreeSet<>((o1, o2) -> {
+            if (o1.getDataInizio().isAfter(o2.getDataInizio())) return -1;
+            else if (o1.getDataInizio().isBefore(o2.getDataInizio())) return 1;
+            else return 0;
+        });
+        if (!abitazione_setPrenotazioni.containsKey(abitazione)) abitazione_setPrenotazioni.put(abitazione, tree);
         abitazione_setPrenotazioni.get(abitazione).add(prenotazione);
     }
 
@@ -64,12 +77,17 @@ public class AirBnB {
         Set<UtenteHost> superHosts = new HashSet<>();
         for (Utente utente : utenti) {
             if (utente instanceof UtenteHost host){
+                if (host.isSuper()) superHosts.add(host);
                 Set<Abitazione> abitazioniHost = host_setAbitazioni.get(host.getHostID());
                 int prenotazioni = 0;
+                if (abitazioniHost == null) {
+                    System.out.println("Non ci sono superHost");
+                    break;
+                }
                 for (Abitazione abitazione : abitazioniHost) {
                     prenotazioni += abitazione_setPrenotazioni.get(abitazione).size();
                 }
-                if (prenotazioni>=0) {
+                if (prenotazioni>=3) {
                     host.setSuper(true);
                     superHosts.add(host);
                 }
@@ -93,6 +111,7 @@ public class AirBnB {
 
         return utente_setPrenotazioni.get(utenteID).last();
     }
+
 
     public HashSet<Abitazione> getAbitazione (UUID utenteHostId)
     {

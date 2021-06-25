@@ -3,6 +3,7 @@ import exceptions.UtenteNotFoundException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws UtenteNotFoundException {
@@ -19,8 +20,8 @@ public class Main {
         Utente hemilian = new Utente("Hemilian", "Hrisca", "hrisca@mail.com");
         Utente pierluigi = new Utente("Pierluigi", "Filosa", "filosa@mail.com");
         Utente senghor = new Utente("Senghor", "Njampo", "njampo@mail.com");
-        Utente riccardo = new UtenteHost("Riccardo", "Pozzati", "pozzati@mail.com");
-        Utente melvin = new UtenteHost("Melvin", "NonRicordo", "nonricordo@mail.com");
+        UtenteHost riccardo = new UtenteHost("Riccardo", "Pozzati", "pozzati@mail.com");
+        UtenteHost melvin = new UtenteHost("Melvin", "NonRicordo", "nonricordo@mail.com");
 
         Prenotazione p1 = new Prenotazione(LocalDate.now(), LocalDate.now().plusDays(7));
         Prenotazione p2 = new Prenotazione(LocalDate.now().plusMonths(1), LocalDate.now().plusMonths(2));
@@ -53,12 +54,16 @@ public class Main {
         a.addAbitPrenotazione(a3, p7);
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
-        
+
+        a.addUtente(senghor);
+        a.addUtente(pierluigi);
         a.addUtente(antonio);
         a.addUtente(hemilian);
-        a.addUtente(pierluigi);
-        a.addUtente(senghor);
-        a.addUtente(riccardo);
         a.addUtente(melvin);
+        a.addUtente(riccardo);
+
+        riccardo.setSuper(true);
+
+        Set<UtenteHost> superHosts = a.getAllSuperHosts();
     }
 }
