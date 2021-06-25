@@ -125,6 +125,6 @@ public class Abitazione
 
     @Override
     public String toString() {
-        return "Abitazione: " + id;
+        return "Abitazione:";
     }
 }

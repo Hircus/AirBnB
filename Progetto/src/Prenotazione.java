@@ -53,6 +53,6 @@ public class Prenotazione implements Comparable<Prenotazione>{
 
     @Override
     public String toString() {
-        return "Prenotazione: " + id;
+        return "Prenotazione:";
     }
 }

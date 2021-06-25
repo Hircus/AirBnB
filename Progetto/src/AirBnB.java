@@ -198,8 +198,11 @@ public class AirBnB {
         StringBuilder text = new StringBuilder();
         for (Map.Entry<UtenteHost, HashSet<Abitazione>> e : host_setAbitazioni.entrySet()) {
             text.append("\n").append(e.getKey()).append("\n");
-            for (Abitazione a : e.getValue())
+            for (Abitazione a : e.getValue()) {
                 text.append("\t").append(a).append("\n");
+                text.append("\t\t").append("ID: " + a.getId()).append("\n");
+                text.append("\t\t").append("Nome: " + a.getNome()).append("\n");
+            }
         }
         return text.toString();
     }
@@ -211,8 +214,12 @@ public class AirBnB {
         StringBuilder text = new StringBuilder();
         for (Map.Entry<Utente, TreeSet<Prenotazione>> e : utente_setPrenotazioni.entrySet()) {
             text.append("\n").append(e.getKey()).append("\n");
-            for (Prenotazione p : e.getValue())
+            for (Prenotazione p : e.getValue()) {
                 text.append("\t").append(p).append("\n");
+                text.append("\t\t").append("ID: " + p.getId()).append("\n");
+                text.append("\t\t").append("Data Inizio: " + p.getDataInizio()).append("\n");
+                text.append("\t\t").append("Data Fine: " + p.getDataFine()).append("\n");
+            }
         }
         return text.toString();
     }
