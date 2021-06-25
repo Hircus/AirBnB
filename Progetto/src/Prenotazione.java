@@ -53,6 +53,7 @@ public class Prenotazione implements Comparable<Prenotazione>{
 
     @Override
     public String toString() {
-        return "Prenotazione:";
+        return "\t\t" + "ID: " + this.getId() + "\n" + "\t\t" + "Data Inizio: "
+                + this.getDataInizio() + "\n" + "\t\t" + "Data Fine: " + this.getDataFine() + "\n";
     }
 }

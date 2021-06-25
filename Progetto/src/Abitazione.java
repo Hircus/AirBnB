@@ -125,6 +125,6 @@ public class Abitazione
 
     @Override
     public String toString() {
-        return "Abitazione:";
+        return "\t\t" + "ID: " + this.getId() + "\n" + "\t\t" + "Nome: " + this.getNome() + "\n";
     }
 }
