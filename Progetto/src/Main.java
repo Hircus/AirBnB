@@ -54,11 +54,11 @@ public class Main {
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
         
-        a.addUtenti(antonio);
-        a.addUtenti(hemilian);
-        a.addUtenti(pierluigi);
-        a.addUtenti(senghor);
-        a.addUtenti(riccardo);
-        a.addUtenti(melvin);
+        a.addUtente(antonio);
+        a.addUtente(hemilian);
+        a.addUtente(pierluigi);
+        a.addUtente(senghor);
+        a.addUtente(riccardo);
+        a.addUtente(melvin);
     }
 }
