@@ -41,6 +41,12 @@ public Prenotazione (UUID id, LocalDate dataInizio, LocalDate dataFine){
     }
 
 public void addFeedback( Prenotazione p){
+        if(p!=null){
+            System.out.println("Feedback possibile");
+
+        }else
+            System.out.println("Non è possibile lasciare un Feedback ");
+
 }
 
 }
