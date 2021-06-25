@@ -1,13 +1,10 @@
 import exceptions.UtenteNotFoundException;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.temporal.ChronoUnit;
-import java.util.Set;
 import java.util.UUID;
 
 public class Main {
-    public static void main(String[] args) throws UtenteNotFoundException {
+    public static void main(String[] args){
         AirBnB a = new AirBnB();
 
         LocalDate data1= LocalDate.now();
@@ -25,8 +22,8 @@ public class Main {
         Prenotazione p2 = new Prenotazione(LocalDate.now().plusMonths(1), LocalDate.now().plusMonths(2));
         Prenotazione p3 = new Prenotazione(LocalDate.now().minusDays(3), LocalDate.now().plusDays(4));
         Prenotazione p4 = new Prenotazione(LocalDate.now().minusMonths(2), LocalDate.now().plusMonths(3));
-        Prenotazione p5 = new Prenotazione(LocalDate.now(), LocalDate.now().plusDays(14));
-        Prenotazione p6 = new Prenotazione(LocalDate.now(), LocalDate.now().plusDays(3));
+        Prenotazione p5 = new Prenotazione(LocalDate.now().minusDays(4), LocalDate.now().plusDays(15));
+        Prenotazione p6 = new Prenotazione(LocalDate.now().minusDays(7), LocalDate.now());
         Prenotazione p7 = new Prenotazione(LocalDate.now().minusDays(3), LocalDate.now().plusDays(9));
 
         Abitazione a1 = new Abitazione(30, "Casa sul mare", "Via Ceppa 1", 3, 2, 4, data1, data2);
@@ -49,17 +46,17 @@ public class Main {
         a.addUtentePrenotazione(emilian.getId(), p2);
         a.addUtentePrenotazione(emilian.getId(), p3);
         a.addUtentePrenotazione(pierluigi.getId(), p4);
-        a.addUtentePrenotazione(senghor.getId(), p5);
-        a.addUtentePrenotazione(senghor.getId(), p6);
         a.addUtentePrenotazione(pierluigi.getId(), p7);
+        a.addUtentePrenotazione(senghor.getId(), p6);
+        a.addUtentePrenotazione(senghor.getId(), p5);
 
         a.addAbitPrenotazione(a1, p1);
         a.addAbitPrenotazione(a1, p3);
+        a.addAbitPrenotazione(a1, p5);
+        a.addAbitPrenotazione(a2, p6);
         a.addAbitPrenotazione(a2, p2);
         a.addAbitPrenotazione(a2, p4);
         a.addAbitPrenotazione(a3, p7);
-        a.addAbitPrenotazione(a1, p5);
-        a.addAbitPrenotazione(a2, p6);
 
         System.out.println("\nSTAMPO TUTTI I SUPER HOST");
         System.out.println(a.getAllSuperHosts());

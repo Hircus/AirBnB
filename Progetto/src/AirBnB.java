@@ -28,7 +28,6 @@ public class AirBnB {
     public void addUtente(Utente u) {
         if (u == null)
             throw new IllegalArgumentException("L'utente inserito è null.");
-
         if (!utenti.containsValue(u)) utenti.put(u.getId(), u);
     }
 
@@ -53,9 +52,11 @@ public class AirBnB {
      * @param prenotazione la prenotazione effettuata dall'utente.
      */
     public void addUtentePrenotazione(UUID idUtente, Prenotazione prenotazione) {
-        TreeSet<Prenotazione> tree = new TreeSet<>();
         Utente u = utenti.get(idUtente);
-        if (!utente_setPrenotazioni.containsKey(u)) utente_setPrenotazioni.put(u, tree);
+        if (!utente_setPrenotazioni.containsKey(u)) {
+            TreeSet<Prenotazione> tree = new TreeSet<>(Comparator.comparing(Prenotazione::getDataInizio));
+            utente_setPrenotazioni.put(u, tree);
+        }
         utente_setPrenotazioni.get(u).add(prenotazione);
     }
 
@@ -66,8 +67,10 @@ public class AirBnB {
      * @param prenotazione .
      */
     public void addAbitPrenotazione(Abitazione abitazione, Prenotazione prenotazione) {
-        TreeSet<Prenotazione> tree = new TreeSet<>();
-        if (!abitazione_setPrenotazioni.containsKey(abitazione)) abitazione_setPrenotazioni.put(abitazione, tree);
+        if (!abitazione_setPrenotazioni.containsKey(abitazione)) {
+            TreeSet<Prenotazione> tree = new TreeSet<>(Comparator.comparing(Prenotazione::getDataInizio));
+            abitazione_setPrenotazioni.put(abitazione, tree);
+        }
         abitazione_setPrenotazioni.get(abitazione).add(prenotazione);
     }
 
