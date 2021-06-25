@@ -192,6 +192,84 @@ public class AirBnB {
     }
 
     /**
+     * Metoodo che calcola i 5 utenti con più giorni prenotati nell'ultimo mese
+     * @return ritorna un TreeSet di utenti ordinati per cognome
+     */
+    public TreeSet<Utente> get5TopUtenti()
+    {
+        TreeMap<Long, HashSet<Utente>> giorniPrenotazione = new TreeMap<>();
+        giorniPrenotazioneBuild(giorniPrenotazione);
+        return topUtentiBuild(giorniPrenotazione);
+    }
+
+
+    /**
+     * Metodo che si trova i 5 utenti con il maggior numero di giorni prenotati
+     *
+     * @param giorniPrenotazione TreeMap della forma <LONG,HASHSET<UTENTE>> che contiene per ogni chiave LONG un lista
+     *                           di utenti che hanno quel valore (LONG sta per il numero di giorni prenotati)
+     * @return un HashSet<Utente> grande massimo 5
+     */
+    public TreeSet<Utente> topUtentiBuild(TreeMap<Long, HashSet<Utente>> giorniPrenotazione)
+    {
+        int counter = 0;
+        TreeSet<Utente> top5 = new TreeSet<>(Comparator.comparing(Utente::getCognome));
+        for (Long key : giorniPrenotazione.descendingKeySet())
+        {
+            for (Utente utente : giorniPrenotazione.get(key))
+            {
+                top5.add(utente);
+                counter++;
+                if (counter == 5) return top5;
+            }
+        }
+        return top5;
+    }
+
+    /**
+     * Metodo che costruisce un TreeMap della forma <LONG,HASHSET<UTENTE>> dove LONG è il numero di giorni prenotati da
+     * un certo UTENTE
+     *
+     * @param giorniPrenotazione il TreeMap da costruire
+     */
+    public void giorniPrenotazioneBuild(TreeMap<Long, HashSet<Utente>> giorniPrenotazione)
+    {
+        long giorni = 0;
+
+        for (UUID key : utenti.keySet())
+        {
+            if(utente_setPrenotazioni.containsKey(utenti.get(key)))
+            {
+                for (Prenotazione prenotazione : utente_setPrenotazioni.get(utenti.get(key)))
+                {
+                    if (ChronoUnit.DAYS.between(LocalDate.now().minusMonths(1), prenotazione.getDataInizio()) < 31)
+                    {
+                        giorni += calcolaGiorni(prenotazione.getDataInizio(), prenotazione.getDataFine());
+                    }
+                }
+                if (!giorniPrenotazione.containsKey(giorni))
+                {
+                    giorniPrenotazione.put(giorni, new HashSet<>());
+                    giorniPrenotazione.get(giorni).add(utenti.get(key));
+                }
+            }
+        }
+    }
+
+    /**
+     * Metodo che calcola la differenza in giorni date due LOCALDATE in input
+     *
+     * @param inizio data di inizio
+     * @param fine   data di fine
+     * @return numero di giorni (long)
+     */
+
+    public long calcolaGiorni(LocalDate inizio, LocalDate fine)
+    {
+        return ChronoUnit.DAYS.between(inizio, fine);
+    }
+
+    /**
      * Stampa una mappa contenente tutte le abitazioni degli utenti super host.
      */
     public String printUtentiHostAbitazioni() {
@@ -230,7 +308,7 @@ public class AirBnB {
             text.append("\n").append("Abitazione: ");
             text.append("\n").append(e.getKey()).append("\n");
             for (Prenotazione p : e.getValue()) {
-                text.append("\t\t").append("Prenotazione: ").append("\n").append(p).append("\n");
+                text.append("\t").append("Prenotazione: ").append("\n").append(p).append("\n");
             }
         }
         return text.toString();

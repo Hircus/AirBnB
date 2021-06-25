@@ -61,6 +61,8 @@ public class Main {
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
 
+        a.get5TopUtenti();
+
         Abitazione abitazione = a.getLastMonthMostPopularAbitazione();
         Prenotazione provaLast = a.getLastPrenotazione(antonio.getId());
 
