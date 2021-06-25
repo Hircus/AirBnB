@@ -7,6 +7,7 @@ public class Prenotazione implements Comparable<Prenotazione>{
     private LocalDate dataFine;
 
     public Prenotazione (LocalDate dataInizio, LocalDate dataFine){
+        this.id = UUID.randomUUID();
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
     }
@@ -48,5 +49,10 @@ public class Prenotazione implements Comparable<Prenotazione>{
         if (this.getDataInizio().isAfter(o.getDataInizio())) return -1;
         else if (this.getDataInizio().isBefore(o.getDataInizio())) return 1;
         else return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Prenotazione: " + id;
     }
 }

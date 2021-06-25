@@ -66,4 +66,9 @@ public class Utente {
         boolean checkEmail = this.getEmail().equals(u.getEmail());
         return super.equals(obj) && u.id.equals(this.id) || (checkNome && checkCognome && checkEmail);
     }
+
+    @Override
+    public String toString() {
+        return nome + ": " + id;
+    }
 }

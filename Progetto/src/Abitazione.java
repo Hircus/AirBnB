@@ -123,4 +123,8 @@ public class Abitazione
         this.fineDisponibilita = fineDisponibilita;
     }
 
+    @Override
+    public String toString() {
+        return "Abitazione: " + id;
+    }
 }

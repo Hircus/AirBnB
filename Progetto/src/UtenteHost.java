@@ -19,4 +19,9 @@ public class UtenteHost extends Utente{
     public boolean isSuper() { return isSuper; }
 
     public void setSuper(boolean aSuper) { isSuper = aSuper; }
+
+    @Override
+    public String toString() {
+        return getNome() + ": " + hostID;
+    }
 }

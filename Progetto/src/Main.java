@@ -30,7 +30,7 @@ public class Main {
 
 
         Abitazione a1 = new Abitazione(30, "Casa sul mare", "Via Ceppa 1", 3, 2, 4, data1, data2);
-        Abitazione a2 = new Abitazione(50, "Casetta in montagnia", "Via Bla 1", 2, 1, 4, data1, data2);
+        Abitazione a2 = new Abitazione(50, "Casetta in montagna", "Via Bla 1", 2, 1, 4, data1, data2);
         Abitazione a3 = new Abitazione(70, "B&B in città", "Via Poo 1", 5, 1, 4, data1, data2);
 
         a.addUtente(senghor);
@@ -68,5 +68,14 @@ public class Main {
 
         Prenotazione prova = a.getLastPrenotazione(pierluigi.getId());
         Set<UtenteHost> superHosts = a.getAllSuperHosts();
+
+        System.out.println("\nSTAMPO TUTTI GLI UTENTI HOST E LE LORO ABITAZIONI");
+        System.out.println(a.printUtentiHostAbitazioni());
+
+        System.out.println("\nSTAMPO TUTTI GLI UTENTI E LE LORO PRENOTAZIONI");
+        System.out.println(a.printUtentiPrenotazioni());
+
+        System.out.println("\nSTAMPO TUTTE LE ABITAZIONI E LE LORO PRENOTAZIONI");
+        System.out.println(a.printAbitazionePrenotazioni());
     }
 }

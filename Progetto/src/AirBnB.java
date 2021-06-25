@@ -190,4 +190,47 @@ public class AirBnB {
         }
         return postiLetto / nAbitazioni;
     }
+
+    /**
+     * Stampa una mappa contenente tutte le abitazioni degli utenti super host.
+     */
+    public String printUtentiHostAbitazioni() {
+        StringBuilder text = new StringBuilder();
+        for (Map.Entry<UtenteHost, HashSet<Abitazione>> e : host_setAbitazioni.entrySet()) {
+            text.append("\n").append(e.getKey()).append("\n");
+            for (Abitazione a : e.getValue())
+                text.append("\t").append(a).append("\n");
+        }
+        return text.toString();
+    }
+
+    /**
+     * Stampa una mappa contenente tutte le prenotazioni effettuate dagli utenti.
+     */
+    public String printUtentiPrenotazioni() {
+        StringBuilder text = new StringBuilder();
+        for (Map.Entry<Utente, TreeSet<Prenotazione>> e : utente_setPrenotazioni.entrySet()) {
+            text.append("\n").append(e.getKey()).append("\n");
+            for (Prenotazione p : e.getValue())
+                text.append("\t").append(p).append("\n");
+        }
+        return text.toString();
+    }
+
+    /**
+     * Stampa una mappa contenente tutte le prenotazioni di tutte le abitazioni.
+     */
+    public String printAbitazionePrenotazioni() {
+        StringBuilder text = new StringBuilder();
+        for (Map.Entry<Abitazione, TreeSet<Prenotazione>> e : abitazione_setPrenotazioni.entrySet()) {
+            text.append("\n").append(e.getKey()).append("\n");
+            for (Prenotazione p : e.getValue())
+                text.append("\t").append(p).append("\n");
+        }
+        return text.toString();
+    }
+
+
+
+
 }
