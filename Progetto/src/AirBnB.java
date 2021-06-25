@@ -234,15 +234,16 @@ public class AirBnB {
      */
     public void giorniPrenotazioneBuild(TreeMap<Long, HashSet<Utente>> giorniPrenotazione)
     {
-        long giorni = 0;
 
         for (UUID key : utenti.keySet())
         {
+            long giorni = 0;
+
             if(utente_setPrenotazioni.containsKey(utenti.get(key)))
             {
                 for (Prenotazione prenotazione : utente_setPrenotazioni.get(utenti.get(key)))
                 {
-                    if (ChronoUnit.DAYS.between(LocalDate.now().minusMonths(1), prenotazione.getDataInizio()) < 31)
+                    if (ChronoUnit.DAYS.between(prenotazione.getDataInizio(),LocalDate.now()) < 31)
                     {
                         giorni += calcolaGiorni(prenotazione.getDataInizio(), prenotazione.getDataFine());
                     }
@@ -250,8 +251,8 @@ public class AirBnB {
                 if (!giorniPrenotazione.containsKey(giorni))
                 {
                     giorniPrenotazione.put(giorni, new HashSet<>());
-                    giorniPrenotazione.get(giorni).add(utenti.get(key));
                 }
+                giorniPrenotazione.get(giorni).add(utenti.get(key));
             }
         }
     }
