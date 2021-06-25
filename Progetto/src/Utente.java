@@ -69,6 +69,6 @@ public class Utente {
 
     @Override
     public String toString() {
-        return nome + ": " + id;
+        return cognome + " " + nome + ": " + id;
     }
 }

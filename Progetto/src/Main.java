@@ -11,7 +11,7 @@ public class Main {
         LocalDate data2= LocalDate.now().plusMonths(1);
 
         Utente antonio = new Utente("Antonio", "Cossu", "cossu@mail.com");
-        Utente emilian = new Utente("Hemilian", "Hrisca", "hrisca@mail.com");
+        Utente emilian = new Utente("Emilian", "Hrisca", "hrisca@mail.com");
         Utente pierluigi = new Utente("Pierluigi", "Filosa", "filosa@mail.com");
         Utente senghor = new Utente("Senghor", "Njampo", "njampo@mail.com");
         Utente senghorlavendetta = new Utente("Senghor", "Njampo", "njampo@mail.com");
@@ -51,6 +51,7 @@ public class Main {
         a.addUtentePrenotazione(senghor.getId(), p5);
 
         a.addAbitPrenotazione(a1, p1);
+        // Questa chiamata alleggerisce la computazione ad O(1)  //p1.casa = a1.getId();
         a.addAbitPrenotazione(a1, p3);
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
@@ -72,6 +73,10 @@ public class Main {
 
         System.out.println("TOP 5 UTENTI CON PIU' GIORNI PRENOTATI ULTIMO MESE ");
         System.out.println(a.get5TopUtenti());
+
+        for (Utente utente : a.get5TopUtenti()) {
+            System.out.println(utente.getCognome() + " " + utente.getNome());
+        }
 
         System.out.println("\nSTAMPO L'ABITAZIONE CON PIU' PRENOTAZIONI NELL'ULTIMO MESE");
         System.out.println(a.getLastMonthMostPopularAbitazione());

@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class Prenotazione {
     private UUID id;
+    //public UUID casa;
     private LocalDate dataInizio;
     private LocalDate dataFine;
 
