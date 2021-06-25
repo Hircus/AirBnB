@@ -31,9 +31,19 @@ public class Main {
         Prenotazione p6 = new Prenotazione(LocalDate.now(), LocalDate.now().plusDays(3));
         Prenotazione p7 = new Prenotazione(LocalDate.now().minusDays(3), LocalDate.now().plusDays(9));
 
+
         Abitazione a1 = new Abitazione(30, "Casa sul mare", "Via Ceppa 1", 3, 2, 4, data1, data2);
-        Abitazione a2 = new Abitazione(50, "Casetta in montagnia", "Via Bla 1", 1, 1, 4, data1, data2);
-        Abitazione a3 = new Abitazione(70, "B&B in città", "Via Poo 1", 1, 1, 4, data1, data2);
+        Abitazione a2 = new Abitazione(50, "Casetta in montagnia", "Via Bla 1", 2, 1, 4, data1, data2);
+        Abitazione a3 = new Abitazione(70, "B&B in città", "Via Poo 1", 5, 1, 4, data1, data2);
+
+        a.addUtente(senghor);
+        a.addUtente(pierluigi);
+        a.addUtente(antonio);
+        a.addUtente(hemilian);
+        a.addUtente(melvin);
+        a.addUtente(riccardo);
+
+        System.out.println("Media Posti Letto: " + a.mediaPostiLetto());
 
         a.addHostAbitazioni(riccardo.getId(), a1);
         a.addHostAbitazioni(riccardo.getId(), a2);
@@ -54,16 +64,6 @@ public class Main {
         a.addAbitPrenotazione(a3, p7);
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
-
-        a.addUtente(senghor);
-        a.addUtente(pierluigi);
-        a.addUtente(antonio);
-        a.addUtente(hemilian);
-        a.addUtente(melvin);
-        a.addUtente(riccardo);
-
-        riccardo.setSuper(true);
-
         Set<UtenteHost> superHosts = a.getAllSuperHosts();
     }
 }

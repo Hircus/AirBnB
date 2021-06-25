@@ -20,35 +20,39 @@ public class AirBnB {
     }
 
     /**
-    * Registra un nuovo utente.
-    * @param u l'utente da registrare.
-    * @throws IllegalArgumentException se l'utente inserito è null.
-    */
+     * Registra un nuovo utente.
+     *
+     * @param u l'utente da registrare.
+     * @throws IllegalArgumentException se l'utente inserito è null.
+     */
     public void addUtente(Utente u) {
-        if(u == null)
-            throw new IllegalArgumentException ("L'utente inserito è null.");
+        if (u == null)
+            throw new IllegalArgumentException("L'utente inserito è null.");
 
         utenti.put(u.getId(), u);
     }
 
     /**
-    * Aggiunge un'abitazione appartentente ad un utente host.
-    * @param host l'utente host al quale appartiene l'abitazione.
-    * @param abitazione l'abitazione appartenente all'utente host.
-    */
-    public void addHostAbitazioni(UUID host, Abitazione abitazione){
-        if (utenti.get(host) instanceof UtenteHost userHost){
-            if (!host_setAbitazioni.containsKey(userHost)) host_setAbitazioni.put(userHost, new HashSet<>(Arrays.asList(abitazione)));
+     * Aggiunge un'abitazione appartentente ad un utente host.
+     *
+     * @param host       l'utente host al quale appartiene l'abitazione.
+     * @param abitazione l'abitazione appartenente all'utente host.
+     */
+    public void addHostAbitazioni(UUID host, Abitazione abitazione) {
+        if (utenti.get(host) instanceof UtenteHost userHost) {
+            if (!host_setAbitazioni.containsKey(userHost))
+                host_setAbitazioni.put(userHost, new HashSet<>(Arrays.asList(abitazione)));
             else host_setAbitazioni.get(userHost).add(abitazione);
         }
     }
 
     /**
-    * Aggiunge una prenotazione effettuata da un utente.
-    * @param idUtente l'utente che ha effettuato la prenotazione.
-    * @param prenotazione la prenotazione effettuata dall'utente.
-    */
-    public void addUtentePrenotazione(UUID idUtente, Prenotazione prenotazione){
+     * Aggiunge una prenotazione effettuata da un utente.
+     *
+     * @param idUtente     l'utente che ha effettuato la prenotazione.
+     * @param prenotazione la prenotazione effettuata dall'utente.
+     */
+    public void addUtentePrenotazione(UUID idUtente, Prenotazione prenotazione) {
         TreeSet<Prenotazione> tree = new TreeSet<>((o1, o2) -> {
             if (o1.getDataInizio().isAfter(o2.getDataInizio())) return -1;
             else if (o1.getDataInizio().isBefore(o2.getDataInizio())) return 1;
@@ -60,11 +64,12 @@ public class AirBnB {
     }
 
     /**
-    * Aggiunge una prenotazione relativa ad un'abitazione.
-    * @param abitazione l'abitazione al quale si riferisce la prenotazione.
-    * @param prenotazione .
-    */
-    public void addAbitPrenotazione(Abitazione abitazione, Prenotazione prenotazione){
+     * Aggiunge una prenotazione relativa ad un'abitazione.
+     *
+     * @param abitazione   l'abitazione al quale si riferisce la prenotazione.
+     * @param prenotazione .
+     */
+    public void addAbitPrenotazione(Abitazione abitazione, Prenotazione prenotazione) {
         TreeSet<Prenotazione> tree = new TreeSet<>((o1, o2) -> {
             if (o1.getDataInizio().isAfter(o2.getDataInizio())) return -1;
             else if (o1.getDataInizio().isBefore(o2.getDataInizio())) return 1;
@@ -75,26 +80,27 @@ public class AirBnB {
     }
 
     /**
-    * Ritorna tutti i super host (i.e. un utente host con più di 100 prenotazioni ricevute).
-    * @return un HashSet contenente tutti i super host.
-    */
-    public Set<UtenteHost> getAllSuperHosts(){
+     * Ritorna tutti i super host (i.e. un utente host con più di 100 prenotazioni ricevute).
+     *
+     * @return un HashSet contenente tutti i super host.
+     */
+    public Set<UtenteHost> getAllSuperHosts() {
         Set<UtenteHost> superHosts = new HashSet<>();
 
         for (Utente utente : utenti.values()) {
-            if (utente instanceof UtenteHost host){
+            if (utente instanceof UtenteHost host) {
                 if (host.isSuper()) superHosts.add(host);
                 Set<Abitazione> abitazioniHost = host_setAbitazioni.get(host);
 
                 if (abitazioniHost == null) {
                     System.out.println("Non ci sono superHost");
-                    break;
+                    continue;
                 }
                 int prenotazioni = 0;
                 for (Abitazione abitazione : abitazioniHost) {
                     prenotazioni += abitazione_setPrenotazioni.get(abitazione).size();
                 }
-                if (prenotazioni>=3) {
+                if (prenotazioni >= 3) {
                     host.setSuper(true);
                     superHosts.add(host);
                 }
@@ -104,16 +110,17 @@ public class AirBnB {
     }
 
     /**
-    * Ritorna l'ultima prenotazione effettuata da un dato utente.
-    * @param utenteID id dell'utente dal quale si vuole ottenere l'ultima prenotazione da lui effettuata.
-    * @return un riferimento dell'ultima prenotazione effettuata dall'utente.
-    * @throws UtenteNotFoundException
-    */
+     * Ritorna l'ultima prenotazione effettuata da un dato utente.
+     *
+     * @param utenteID id dell'utente dal quale si vuole ottenere l'ultima prenotazione da lui effettuata.
+     * @return un riferimento dell'ultima prenotazione effettuata dall'utente.
+     * @throws UtenteNotFoundException
+     */
     public Prenotazione getLastPrenotazione(UUID utenteID) throws UtenteNotFoundException {
-        if(utenteID == null)
-            throw new IllegalArgumentException ("L'utente inserito è null.");
+        if (utenteID == null)
+            throw new IllegalArgumentException("L'utente inserito è null.");
 
-        if(!utente_setPrenotazioni.containsKey(utenti.get(utenteID)))
+        if (!utente_setPrenotazioni.containsKey(utenti.get(utenteID)))
             throw new UtenteNotFoundException("Utente non trovato.");
 
         return utente_setPrenotazioni.get(utenti.get(utenteID)).last();
@@ -121,22 +128,23 @@ public class AirBnB {
 
 
     /**
-    * Ritorna l'abitazione più popolare (i.e. quella con più prenotazioni) nell'ultimo mese.
-    * @return un riferimento dell'abitazione più popolare.
-    */
-    public Abitazione getLastMonthMostPopularAbitazione(){
+     * Ritorna l'abitazione più popolare (i.e. quella con più prenotazioni) nell'ultimo mese.
+     *
+     * @return un riferimento dell'abitazione più popolare.
+     */
+    public Abitazione getLastMonthMostPopularAbitazione() {
         Abitazione a = new Abitazione();
         long period;
         int maxCounter = 0;
 
-        for(Map.Entry<Abitazione, TreeSet<Prenotazione>> entry : abitazione_setPrenotazioni.entrySet()) {
+        for (Map.Entry<Abitazione, TreeSet<Prenotazione>> entry : abitazione_setPrenotazioni.entrySet()) {
             int abitazioneCounter = 0;
 
-            for(Prenotazione p : entry.getValue())
-                if(ChronoUnit.DAYS.between(LocalDate.now(), p.getDataInizio()) < 30)
+            for (Prenotazione p : entry.getValue())
+                if (ChronoUnit.DAYS.between(LocalDate.now(), p.getDataInizio()) < 30)
                     abitazioneCounter++;
 
-            if(abitazioneCounter > maxCounter)
+            if (abitazioneCounter > maxCounter)
                 a = entry.getKey();
         }
 
@@ -144,25 +152,26 @@ public class AirBnB {
     }
 
     /**
-    * Ritorna l'utente host con più prenotazioni nell'ultimo mese.
-    * @return un riferimento dell'utente host con più prenotazioni nell'ultimo mese.
-    */
-    public UtenteHost getLastMonthMostPopularHost(){
+     * Ritorna l'utente host con più prenotazioni nell'ultimo mese.
+     *
+     * @return un riferimento dell'utente host con più prenotazioni nell'ultimo mese.
+     */
+    public UtenteHost getLastMonthMostPopularHost() {
         UtenteHost uh = new UtenteHost();
         long period;
         int maxCounter = 0;
 
-        for(Map.Entry<UtenteHost, HashSet<Abitazione>> entry : host_setAbitazioni.entrySet()) {
+        for (Map.Entry<UtenteHost, HashSet<Abitazione>> entry : host_setAbitazioni.entrySet()) {
             int counterHost = 0;
 
-            for(Abitazione a: entry.getValue()){
-                for(Prenotazione p :abitazione_setPrenotazioni.get(a)){
-                    if(ChronoUnit.DAYS.between(LocalDate.now(), p.getDataInizio()) < 30)
+            for (Abitazione a : entry.getValue()) {
+                for (Prenotazione p : abitazione_setPrenotazioni.get(a)) {
+                    if (ChronoUnit.DAYS.between(LocalDate.now(), p.getDataInizio()) < 30)
                         counterHost++;
                 }
             }
 
-            if(counterHost > maxCounter)
+            if (counterHost > maxCounter)
                 uh = entry.getKey();
         }
 
@@ -170,12 +179,25 @@ public class AirBnB {
     }
 
 
-    public HashSet<Abitazione> getAbitazione (UUID utenteHostId)
-    {
+    public HashSet<Abitazione> getAbitazione(UUID utenteHostId) {
         if (utenti.get(utenteHostId) instanceof UtenteHost utenteHost) {
             return host_setAbitazioni.get(utenteHost);
-        }
-        else return null;
+        } else return null;
     }
 
+    public int mediaPostiLetto() {
+        int nAbitazioni = 0;
+        int postiLetto = 0;
+        for (HashSet<Abitazione> abitazioni : host_setAbitazioni.values()) {
+            nAbitazioni += abitazioni.size();
+            for (Abitazione abitazione : abitazioni) {
+                postiLetto += abitazione.getNumeroPostiLetto();
+            }
+        }
+        if (nAbitazioni == 0) {
+            System.out.println("Non ci sono abitazioni");
+            return nAbitazioni;
+        }
+        return postiLetto / nAbitazioni;
+    }
 }
