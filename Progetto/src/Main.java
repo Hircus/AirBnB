@@ -11,17 +11,14 @@ public class Main {
 
         LocalDate data1= LocalDate.now();
         LocalDate data2= LocalDate.now().plusMonths(1);
-        System.out.println((Period.between(data1,data2).getYears()*12+ Period.between(data1,data2).getMonths())*30);
-        System.out.println(LocalDate.now().toEpochDay());
-        long period = ChronoUnit.DAYS.between(data1, data2);
-        System.out.println(period);
 
         Utente antonio = new Utente("Antonio", "Cossu", "cossu@mail.com");
         Utente hemilian = new Utente("Hemilian", "Hrisca", "hrisca@mail.com");
         Utente pierluigi = new Utente("Pierluigi", "Filosa", "filosa@mail.com");
         Utente senghor = new Utente("Senghor", "Njampo", "njampo@mail.com");
+        Utente senghorlavendetta = new Utente("Senghor", "Njampo", "njampo@mail.com");
         UtenteHost riccardo = new UtenteHost("Riccardo", "Pozzati", "pozzati@mail.com");
-        UtenteHost melvin = new UtenteHost("Melvin", "NonRicordo", "nonricordo@mail.com");
+        UtenteHost melvin = new UtenteHost("Melvin", "Massotti", "massotti@mail.com");
 
         Prenotazione p1 = new Prenotazione(LocalDate.now(), LocalDate.now().plusDays(7));
         Prenotazione p2 = new Prenotazione(LocalDate.now().plusMonths(1), LocalDate.now().plusMonths(2));
@@ -37,13 +34,12 @@ public class Main {
         Abitazione a3 = new Abitazione(70, "B&B in città", "Via Poo 1", 5, 1, 4, data1, data2);
 
         a.addUtente(senghor);
+        a.addUtente(senghorlavendetta);
         a.addUtente(pierluigi);
         a.addUtente(antonio);
         a.addUtente(hemilian);
         a.addUtente(melvin);
         a.addUtente(riccardo);
-
-        System.out.println("Media Posti Letto: " + a.mediaPostiLetto());
 
         a.addHostAbitazioni(riccardo.getId(), a1);
         a.addHostAbitazioni(riccardo.getId(), a2);
@@ -65,12 +61,12 @@ public class Main {
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
 
+        Abitazione abitazione = a.getLastMonthMostPopularAbitazione();
+        Prenotazione provaLast = a.getLastPrenotazione(antonio.getId());
 
         System.out.println("Media Posti Letto: " + a.mediaPostiLetto());
 
         Prenotazione prova = a.getLastPrenotazione(pierluigi.getId());
-        System.out.println(prova.getDataInizio()+" "+prova.getDataFine());
-        System.out.println(p7.getDataInizio()+" "+prova.getDataFine());
         Set<UtenteHost> superHosts = a.getAllSuperHosts();
     }
 }

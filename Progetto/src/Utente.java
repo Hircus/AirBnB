@@ -18,28 +18,52 @@ public class Utente {
         this.id = UUID.randomUUID();
     }
 
-    public void addFeedback(Prenotazione p){
+    public void addFeedback(Prenotazione p) {
 
     }
 
-    public String getNome() { return nome; }
+    public String getNome() {
+        return nome;
+    }
 
-    public void setNome(String nome) { this.nome = nome; }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    public String getCognome() { return cognome; }
+    public String getCognome() {
+        return cognome;
+    }
 
-    public void setCognome(String cognome) { this.cognome = cognome; }
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getIndirizzo() { return indirizzo; }
+    public String getIndirizzo() {
+        return indirizzo;
+    }
 
-    public void setIndirizzo(String indirizzo) { this.indirizzo = indirizzo; }
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
 
-    public UUID getId() { return id; }
+    public UUID getId() {
+        return id;
+    }
 
     @Override
-    public boolean equals(Object obj) { return super.equals(obj) && obj instanceof Utente u && u.id.equals(this.id); }
+    public boolean equals(Object obj) {
+        Utente u = (Utente) obj;
+        boolean checkNome = this.getNome().equals(u.getNome());
+        boolean checkCognome = this.getCognome().equals(u.getCognome());
+        boolean checkEmail = this.getEmail().equals(u.getEmail());
+        return super.equals(obj) && u.id.equals(this.id) || (checkNome && checkCognome && checkEmail);
+    }
 }

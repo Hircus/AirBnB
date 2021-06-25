@@ -29,7 +29,7 @@ public class AirBnB {
         if (u == null)
             throw new IllegalArgumentException("L'utente inserito è null.");
 
-        utenti.put(u.getId(), u);
+        if (!utenti.containsValue(u)) utenti.put(u.getId(), u);
     }
 
     /**
