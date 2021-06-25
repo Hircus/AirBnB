@@ -29,4 +29,4 @@ Period.between(aDate, sixtyDaysBehind);
 Nota: gestite tutto con le collection, nessun database (per ora!)
 
 # Diagramma delle classi
-![classdiagram](./ClassDiagram.svg)
+![classdiagram](./ClassDiagram.jpg)
