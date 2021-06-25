@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Prenotazione {
+public class Prenotazione implements Comparable<Prenotazione>{
     private UUID id;
     private LocalDate dataInizio;
     private LocalDate dataFine;
@@ -41,5 +41,12 @@ public class Prenotazione {
 
             }else
                 System.out.println("Non è possibile lasciare un Feedback ");
+    }
+
+    @Override
+    public int compareTo(Prenotazione o) {
+        if (this.getDataInizio().isAfter(o.getDataInizio())) return -1;
+        else if (this.getDataInizio().isBefore(o.getDataInizio())) return 1;
+        else return 0;
     }
 }

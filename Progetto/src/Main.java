@@ -64,6 +64,13 @@ public class Main {
         a.addAbitPrenotazione(a3, p7);
         a.addAbitPrenotazione(a1, p5);
         a.addAbitPrenotazione(a2, p6);
+
+
+        System.out.println("Media Posti Letto: " + a.mediaPostiLetto());
+
+        Prenotazione prova = a.getLastPrenotazione(pierluigi.getId());
+        System.out.println(prova.getDataInizio()+" "+prova.getDataFine());
+        System.out.println(p7.getDataInizio()+" "+prova.getDataFine());
         Set<UtenteHost> superHosts = a.getAllSuperHosts();
     }
 }
