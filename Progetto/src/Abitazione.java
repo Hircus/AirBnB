@@ -28,6 +28,10 @@ public class Abitazione
         setId(UUID.randomUUID());
     }
 
+    public Abitazione() {
+
+    }
+
     /*** SETTERS AND GETTERS ***/
     public UUID getId()
     {

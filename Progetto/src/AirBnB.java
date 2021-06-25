@@ -120,6 +120,56 @@ public class AirBnB {
     }
 
 
+    /**
+    * Ritorna l'abitazione più popolare (i.e. quella con più prenotazioni) nell'ultimo mese.
+    * @return un riferimento dell'abitazione più popolare.
+    */
+    public Abitazione getLastMonthMostPopularAbitazione(){
+        Abitazione a = new Abitazione();
+        long period;
+        int maxCounter = 0;
+
+        for(Map.Entry<Abitazione, TreeSet<Prenotazione>> entry : abitazione_setPrenotazioni.entrySet()) {
+            int abitazioneCounter = 0;
+
+            for(Prenotazione p : entry.getValue())
+                if(ChronoUnit.DAYS.between(LocalDate.now(), p.getDataInizio()) < 30)
+                    abitazioneCounter++;
+
+            if(abitazioneCounter > maxCounter)
+                a = entry.getKey();
+        }
+
+        return a;
+    }
+
+    /**
+    * Ritorna l'utente host con più prenotazioni nell'ultimo mese.
+    * @return un riferimento dell'utente host con più prenotazioni nell'ultimo mese.
+    */
+    public UtenteHost getLastMonthMostPopularHost(){
+        UtenteHost uh = new UtenteHost();
+        long period;
+        int maxCounter = 0;
+
+        for(Map.Entry<UtenteHost, HashSet<Abitazione>> entry : host_setAbitazioni.entrySet()) {
+            int counterHost = 0;
+
+            for(Abitazione a: entry.getValue()){
+                for(Prenotazione p :abitazione_setPrenotazioni.get(a)){
+                    if(ChronoUnit.DAYS.between(LocalDate.now(), p.getDataInizio()) < 30)
+                        counterHost++;
+                }
+            }
+
+            if(counterHost > maxCounter)
+                uh = entry.getKey();
+        }
+
+        return uh;
+    }
+
+
     public HashSet<Abitazione> getAbitazione (UUID utenteHostId)
     {
         if (utenti.get(utenteHostId) instanceof UtenteHost utenteHost) {

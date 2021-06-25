@@ -14,6 +14,10 @@ public class Utente {
         this.email = email;
     }
 
+    public Utente() {
+        this.id = UUID.randomUUID();
+    }
+
     public void addFeedback(Prenotazione p){
 
     }
