@@ -122,7 +122,10 @@ public class AirBnB {
 
     public HashSet<Abitazione> getAbitazione (UUID utenteHostId)
     {
-        return host_setAbitazioni.get(utenti.get(utenteHostId));
+        if (utenti.get(utenteHostId) instanceof UtenteHost utenteHost) {
+            return host_setAbitazioni.get(utenteHost);
+        }
+        else return null;
     }
 
 }

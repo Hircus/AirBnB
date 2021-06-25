@@ -2,22 +2,13 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Prenotazione {
-public Prenotazione (UUID id, LocalDate dataInizio, LocalDate dataFine){
-
-    this.id = id;
-    this.dataInizio = dataInizio;
-    this.dataFine = dataFine;
-
-}
-
-
     private UUID id;
     private LocalDate dataInizio;
     private LocalDate dataFine;
 
-
-    public void setId(UUID id) {
-        this.id = id;
+    public Prenotazione (LocalDate dataInizio, LocalDate dataFine){
+        this.dataInizio = dataInizio;
+        this.dataFine = dataFine;
     }
 
     public void setDataInizio(LocalDate dataInizio) {
@@ -26,6 +17,10 @@ public Prenotazione (UUID id, LocalDate dataInizio, LocalDate dataFine){
 
     public void setDataFine(LocalDate dataFine) {
         this.dataFine = dataFine;
+    }
+
+    public void setId() {
+        this.id = UUID.randomUUID();
     }
 
     public UUID getId() {
@@ -40,13 +35,11 @@ public Prenotazione (UUID id, LocalDate dataInizio, LocalDate dataFine){
         return dataFine;
     }
 
-public void addFeedback( Prenotazione p){
-        if(p!=null){
-            System.out.println("Feedback possibile");
+    public void addFeedback( Prenotazione p){
+            if(p!=null){
+                System.out.println("Feedback possibile");
 
-        }else
-            System.out.println("Non è possibile lasciare un Feedback ");
-
-}
-
+            }else
+                System.out.println("Non è possibile lasciare un Feedback ");
+    }
 }
